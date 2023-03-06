@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  padding: 0 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(9, 14, 25);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(22, 37, 68);
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+    background: rgb(16, 37, 81); 
+  } */
+
+html,
+body {
+  color: white;
+  background-color: rgb(22, 37, 68);
+}
+
+input[type="file"] {
+  display: none;
+}
+/* 
+.required {
+  display: none;
+}
+
+input:invalid ~ p > .required {
+  display: auto;
+} */

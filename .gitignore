@@ -1,0 +1,11 @@
+# Folders
+images/
+
+# Test Outputs
+out**
+
+# Vs Code
+.vscode/
+
+#Environment Varibles
+.env
