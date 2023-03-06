@@ -5,7 +5,7 @@ import { Nav } from "../comp"
 export const Home = () => {
 
     async function getData(){
-        const res = await fetch('http://127.0.0.1:8000/')
+        const res = await fetch('https://backend-auto-attendance.onrender.com/')
 
         console.log(res)
         const my_json = await res.json()

@@ -6,9 +6,10 @@ export const Nav = () => {
     const [proPic, setProPic] = useState("");
     useEffect(() => {
         const getProPic = async () => {
-            const URL = "http://127.0.0.1:8000/imgs/"
+            const URL = "https://backend-auto-attendance.onrender.com/imgs/"
             const res = await fetch(URL)
 
+            console.log(res)
             const resObj = await res.json()
             console.log(resObj)
 

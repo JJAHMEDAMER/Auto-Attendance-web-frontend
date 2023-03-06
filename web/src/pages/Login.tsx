@@ -15,7 +15,7 @@ export const Login = () => {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const URL = "http://127.0.0.1:8000/login/"
+        const URL = "https://backend-auto-attendance.onrender.com/login/"
         const res = await fetch(URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },

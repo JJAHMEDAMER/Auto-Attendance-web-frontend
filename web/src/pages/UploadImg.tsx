@@ -59,7 +59,7 @@ export const UploadImg = () => {
     }
 
     async function uploadImage(imgURI: string | ArrayBuffer | null) {
-        const upImg = await fetch("http://127.0.0.1:8000/imgs/", {
+        const upImg = await fetch("https://backend-auto-attendance.onrender.com/imgs/", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

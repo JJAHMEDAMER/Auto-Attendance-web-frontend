@@ -59,7 +59,7 @@ export const Signup = () => {
     }
 
     async function createUser(body: object) {
-        const URL = "http://127.0.0.1:8000/signup/"
+        const URL = "https://backend-auto-attendance.onrender.com/signup/"
         const res = await fetch(URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
