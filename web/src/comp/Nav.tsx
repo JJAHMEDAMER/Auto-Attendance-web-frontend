@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react"
 import ASULOGO from "../assets/asu-logo.png"
+import { myFetchGet } from "../utils/myFetch";
 
 
 export const Nav = () => {
     const [proPic, setProPic] = useState("");
+
     useEffect(() => {
+
         const getProPic = async () => {
-            const URL = "https://backend-auto-attendance.onrender.com/imgs/"
-            const res = await fetch(URL)
-
-            console.log(res)
-            const resObj = await res.json()
-            console.log(resObj)
-
-            setProPic(resObj[0].image)
-            // console.log(proPic)
+            const imgList = await myFetchGet('imgs/')
+            setProPic(imgList[0].image)
         }
         console.log("useEffect")
-
         getProPic()
+
     }, [proPic])
+
     return (
         <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
             <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />

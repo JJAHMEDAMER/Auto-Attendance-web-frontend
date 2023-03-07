@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Button, Input, Nav } from "../comp"
+import { myFetchPost } from "../utils/myFetch"
 
 export const Signup = () => {
     const [formInputValues, setFormInputValues] = useState({
@@ -55,19 +56,7 @@ export const Signup = () => {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         console.log(formInputValues)
-        createUser(formInputValues)
-    }
-
-    async function createUser(body: object) {
-        const URL = "https://backend-auto-attendance.onrender.com/signup/"
-        const res = await fetch(URL, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-        })
-
-        const resJson = await res.json()
-        console.log(resJson)
+        myFetchPost("signup/", formInputValues)
     }
 
     return (

@@ -2,18 +2,13 @@ import { useEffect } from "react";
 import IMG from "../assets/home/smart-camps.svg"
 import { Nav } from "../comp"
 
+// utils
+import { myFetchGet } from "../utils/myFetch";
+
 export const Home = () => {
 
-    async function getData(){
-        const res = await fetch('https://backend-auto-attendance.onrender.com/')
-
-        console.log(res)
-        const my_json = await res.json()
-        console.log(my_json) 
-    }
-
     useEffect(()=>{
-        getData()
+        myFetchGet('')
     }, [])
 
     return <div className="min-h-screen flex flex-col">

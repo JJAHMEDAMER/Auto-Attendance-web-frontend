@@ -3,6 +3,7 @@ import { FiUpload } from "react-icons/fi"
 import { BsImages } from "react-icons/bs"
 // import { IoMdImages } from "react-icons/Io"
 import { useEffect, useState } from 'react'
+import { myFetchPost } from '../utils/myFetch'
 
 export const UploadImg = () => {
     const acceptableFileFormate = ".png, .jpeg, .jpg"
@@ -52,22 +53,10 @@ export const UploadImg = () => {
             fileReader.onload = () => {
                 const srcData = fileReader.result;
                 // console.log('base64:', srcData)
-                uploadImage(srcData)
+                myFetchPost("imgs/", {image: srcData})
             }
             fileReader.readAsDataURL(inImg);
         }
-    }
-
-    async function uploadImage(imgURI: string | ArrayBuffer | null) {
-        const upImg = await fetch("https://backend-auto-attendance.onrender.com/imgs/", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                image: imgURI
-            })
-        })
-        const res = await upImg.json()
-        console.log(res)
     }
 
     useEffect(() => {
