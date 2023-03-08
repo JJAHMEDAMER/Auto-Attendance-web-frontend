@@ -1,14 +1,23 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Button, Input, Nav } from "../comp"
 import { myFetchPost } from "../utils/myFetch"
 
 // User Context
 import UserContext from "../utils/UserContext"
 
+// Router
+import { useNavigate, Link, Navigate } from "react-router-dom"
+
 export const Login = () => {
 
     const { token, setToken } = useContext(UserContext)
+    const navigate = useNavigate()
 
+    if (token) {
+        return <Navigate to="/" />
+    }
+
+    const [error, setError] = useState<string | null>(null)
     const [formInputValue, setFormInputValue] = useState({
         email: "",
         password: "",
@@ -31,8 +40,14 @@ export const Login = () => {
             },
             token
         )
-        setToken(res.access_token)
-        localStorage.setItem("token", res.access_token)
+        console.log(res)
+        if (res.access_token) {
+            setToken(res.access_token)
+            localStorage.setItem("token", res.access_token)
+            navigate("/")
+        }else {
+            setError(res.detail)
+        }
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -53,6 +68,12 @@ export const Login = () => {
         //     setFormInputValueError({ ...formInputValueError, [e.target.name]: true })
         // }
     }
+
+    useEffect(()=>{
+        const time = setTimeout(() => {
+            setError(null)
+        }, 3000)
+    }, [error])
 
     return (
         <div className="h-screen flex flex-col items-center justify-center">
@@ -96,9 +117,10 @@ export const Login = () => {
                                 error={formInputValueError.collegeID}
                                 errorMsg={"password must contain at least 1 letter, 1 number and 1 special character"}
                             />
+                            <p className="text-center text-red-500 text-sm h-2">{error}</p>
                             <Button text={"Login"} />
                         </form>
-                        <p className="text-sm text-gray-400">Don't Have an Account? <a className="underline text-sky-500" href="/signup">Sign Up</a></p>
+                        <p className="text-sm text-gray-400">Don't Have an Account? <Link className="underline text-sky-500" to="/signup">Sign Up</Link></p>
                     </div>
                     <div className="max-w-1/2 w-2/5 ">
                         <img className="object-cover h-full  rounded-2xl" src="https://media.istockphoto.com/id/1264624897/photo/biometric-verification-and-face-detection.jpg?s=612x612&w=0&k=20&c=MEAfGJH_XZRqMoJNpfB0k8VoEhyVBx7AeSx0W6b0c_o=" alt="" />
