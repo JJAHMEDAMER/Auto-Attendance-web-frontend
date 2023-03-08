@@ -23,8 +23,13 @@ export const Login = () => {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const res = await myFetchPost('login/',
-            { email: formInputValue.email, password: formInputValue.password },
+        const res = await myFetchPost(
+            'login/',
+            {
+                email: formInputValue.email,
+                password: formInputValue.password
+            },
+            token
         )
         setToken(res.access_token)
         localStorage.setItem("token", res.access_token)

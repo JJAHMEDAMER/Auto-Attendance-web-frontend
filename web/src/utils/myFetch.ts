@@ -1,7 +1,7 @@
 // const BASEURL = "https://backend-auto-attendance.onrender.com/";
 const BASEURL = "http://127.0.0.1:8000/";
 
-async function myFetchGet(url: string, token: string | null = null) {
+async function myFetchGet(url: string, token: string | null) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "GET",
@@ -18,7 +18,7 @@ async function myFetchGet(url: string, token: string | null = null) {
   return resJson;
 }
 
-async function myFetchPost(url: string, body: object, token: string | null = null) {
+async function myFetchPost(url: string, body: object, token: string | null) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "POST",

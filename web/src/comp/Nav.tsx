@@ -15,7 +15,7 @@ export const Nav = () => {
     useEffect(() => {
 
         const getProPic = async () => {
-            const imgList = await myFetchGet('imgs/')
+            const imgList = await myFetchGet('imgs/', token)
             setProPic(imgList[0].image)
         }
         console.log("useEffect")

@@ -6,7 +6,7 @@ import { myFetchPost } from "../utils/myFetch"
 import UserContext from "../utils/UserContext"
 
 export const Signup = () => {
-    const {token, setToken} = useContext(UserContext)
+    const { token, setToken } = useContext(UserContext)
     const [formInputValues, setFormInputValues] = useState({
         name: "",
         email: "",
@@ -40,7 +40,8 @@ export const Signup = () => {
         error: false,
         errorMsg: "hello",
         onChange: handleFormInput,
-    }, {
+    },
+    {
         name: "password",
         label: "Password",
         placeholder: "Your password",
@@ -55,11 +56,10 @@ export const Signup = () => {
     function handleFormInput(e: React.ChangeEvent<HTMLInputElement>) {
         setFormInputValues({ ...formInputValues, [e.target.name]: e.target.value })
     }
-    // console.log(formInputValues)
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const res = await myFetchPost("signup/", formInputValues)
+        const res = await myFetchPost("signup/", formInputValues, token)
         setToken(res.access_token)
         localStorage.setItem("token", token!)
     }
