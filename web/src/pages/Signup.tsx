@@ -1,8 +1,12 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Button, Input, Nav } from "../comp"
 import { myFetchPost } from "../utils/myFetch"
 
+//User Context
+import UserContext from "../utils/UserContext"
+
 export const Signup = () => {
+    const {token, setToken} = useContext(UserContext)
     const [formInputValues, setFormInputValues] = useState({
         name: "",
         email: "",
@@ -53,10 +57,11 @@ export const Signup = () => {
     }
     // console.log(formInputValues)
 
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        console.log(formInputValues)
-        myFetchPost("signup/", formInputValues)
+        const res = await myFetchPost("signup/", formInputValues)
+        setToken(res.access_token)
+        localStorage.setItem("token", token!)
     }
 
     return (
