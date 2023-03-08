@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import ASULOGO from "../assets/asu-logo.png"
 import { myFetchGet } from "../utils/myFetch";
 
+// NavLink 
+import { NavLink } from "react-router-dom";
+
 
 export const Nav = () => {
     const [proPic, setProPic] = useState("");
@@ -17,6 +20,10 @@ export const Nav = () => {
 
     }, [proPic])
 
+    const activeStyle = {
+        color: "rgb(219 39 119)",
+        fontWeight: "bold"
+    }
     return (
         <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
             <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />
@@ -25,13 +32,40 @@ export const Nav = () => {
                 className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full 
                         child-hover:bg-sky-600 child-hover:bg-opacity-10 child-hover:outline child-hover:outline-1 child-hover:outline-sky-600"
             >
-                <li><a href="/">Home</a></li>
-                <li><a href="/upload-img">Upload Your Image</a></li>
+                <li>
+                    <NavLink
+                        to="/"
+                        style={({ isActive }) => isActive ? activeStyle : undefined}
+                    >
+                        Home
+                    </NavLink>
+                </li>
+                <li><NavLink
+                    to="/upload-img"
+                    style={({ isActive }) => isActive ? activeStyle : undefined}
+                >
+                    Upload Your Image
+                </NavLink>
+                </li>
                 <li>Read More</li>
             </ul>
             <ul className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full child-hover:bg-sky-600">
-                <li><a href="/login">Login</a></li>
-                <li><a href="signup">Sign Up</a></li>
+                <li>
+                    <NavLink
+                        to="/login"
+                        style={({ isActive }) => isActive ? activeStyle : undefined}
+                    >
+                        Login
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/signup"
+                        style={({ isActive }) => isActive ? activeStyle : undefined}
+                    >
+                        Sign Up
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
