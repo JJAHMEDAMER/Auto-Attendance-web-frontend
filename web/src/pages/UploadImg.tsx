@@ -2,10 +2,23 @@ import { Nav } from '../comp'
 import { FiUpload } from "react-icons/fi"
 import { BsImages } from "react-icons/bs"
 // import { IoMdImages } from "react-icons/Io"
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { myFetchPost } from '../utils/myFetch'
 
+// Router
+import { Navigate } from "react-router-dom";
+
+//context
+import UserContext from '../utils/UserContext'
+
 export const UploadImg = () => {
+    const { token, setToken } = useContext(UserContext)
+    console.log(typeof token)
+    
+    if (token === null) {
+        return <Navigate to="/login" replace />;
+    }
+
     const acceptableFileFormate = ".png, .jpeg, .jpg"
     const [dragActive, setDragActive] = useState(false)
     const [fileError, setFileError] = useState<"No Image is Selected" | "Wrong Formate (jpg, jpeg or pngs)" | "">("")
@@ -53,7 +66,7 @@ export const UploadImg = () => {
             fileReader.onload = () => {
                 const srcData = fileReader.result;
                 // console.log('base64:', srcData)
-                myFetchPost("imgs/", {image: srcData})
+                myFetchPost("imgs/", { image: srcData }, token)
             }
             fileReader.readAsDataURL(inImg);
         }
