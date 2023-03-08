@@ -13,7 +13,6 @@ import UserContext from '../utils/UserContext'
 
 export const UploadImg = () => {
     const { token, setToken } = useContext(UserContext)
-    console.log(typeof token)
     
     if (token === null) {
         return <Navigate to="/login" replace />;

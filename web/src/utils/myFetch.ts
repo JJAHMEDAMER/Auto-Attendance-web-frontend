@@ -11,10 +11,7 @@ async function myFetchGet(url: string, token: string | null) {
     },
   });
 
-  console.log(res);
   const resJson = await res.json();
-  console.log(resJson);
-
   return resJson;
 }
 
@@ -29,16 +26,11 @@ async function myFetchPost(url: string, body: object, token: string | null) {
     body: JSON.stringify(body),
   });
 
-  console.log(res);
   const resJson = await res.json();
-  console.log(resJson);
-
   return resJson;
 }
 
 async function myFetchGetToken(url: string, token: string | null) {
-  console.log(token)
-
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "GET",
@@ -48,10 +40,7 @@ async function myFetchGetToken(url: string, token: string | null) {
     },
   });
 
-  console.log(res);
   const resJson = await res.json();
-  console.log(resJson);
-
   return { resJson, res };
 }
 

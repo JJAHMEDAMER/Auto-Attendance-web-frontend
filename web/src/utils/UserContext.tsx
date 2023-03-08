@@ -14,13 +14,10 @@ type PropType = {
 const UserProvider = ({ children }: PropType) => {
 
     const [token, setToken] = useState<string | null>(localStorage.getItem("token")==="null"? null: localStorage.getItem("token"))
-    console.log(token)
 
     useEffect(() => {
         const getUser = async () => {
-            console.log(token)
             const {resJson, res} = await myFetchGetToken("me", token)
-            console.log(resJson)
             if (!res.ok){
                 setToken(null)
             }
