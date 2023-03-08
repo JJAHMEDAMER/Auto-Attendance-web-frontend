@@ -1,14 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import IMG from "../assets/home/smart-camps.svg"
 import { Nav } from "../comp"
 
 // utils
 import { myFetchGet } from "../utils/myFetch";
 
+// User Context
+import UserContext from "../utils/UserContext"
+
 export const Home = () => {
 
-    useEffect(()=>{
-        myFetchGet('')
+    const {token, setToken} = useContext(UserContext)
+
+    useEffect(() => {
+        myFetchGet('', token)
     }, [])
 
     return <div className="min-h-screen flex flex-col">
