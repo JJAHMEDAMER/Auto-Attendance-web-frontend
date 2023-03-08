@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import ASULOGO from "../assets/asu-logo.png"
 import { myFetchGet } from "../utils/myFetch";
 
 // NavLink 
 import { NavLink } from "react-router-dom";
 
+// UserContext
+import UserContext from "../utils/UserContext";
 
 export const Nav = () => {
     const [proPic, setProPic] = useState("");
+    const { token, setToken } = useContext(UserContext)
 
     useEffect(() => {
 
@@ -49,24 +52,32 @@ export const Nav = () => {
                 </li>
                 <li>Read More</li>
             </ul>
+
             <ul className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full child-hover:bg-sky-600">
-                <li>
-                    <NavLink
-                        to="/login"
-                        style={({ isActive }) => isActive ? activeStyle : undefined}
-                    >
-                        Login
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/signup"
-                        style={({ isActive }) => isActive ? activeStyle : undefined}
-                    >
-                        Sign Up
-                    </NavLink>
-                </li>
+                {
+                    !token ? (
+                        <>
+                            <li>
+                                <NavLink
+                                    to="/login"
+                                    style={({ isActive }) => isActive ? activeStyle : undefined}
+                                >
+                                    Login
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/signup"
+                                    style={({ isActive }) => isActive ? activeStyle : undefined}
+                                >
+                                    Sign Up
+                                </NavLink>
+                            </li>
+                        </>
+                    ) : <button onClick={() => setToken(null)}>Log Out</button>
+                }
             </ul>
+
         </nav>
     )
 }
