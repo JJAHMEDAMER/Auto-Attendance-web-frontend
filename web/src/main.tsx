@@ -8,7 +8,10 @@ import "./style.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // Pages
-import {Home, Signup, Login, UploadImg} from "./pages"
+import { Home, Signup, Login, UploadImg } from "./pages"
+
+// Context
+import { UserProvider } from './utils/UserContext'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 )
