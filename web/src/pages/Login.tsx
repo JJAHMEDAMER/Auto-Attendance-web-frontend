@@ -1,13 +1,20 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Button, Input, Nav } from "../comp"
 import { myFetchPost } from "../utils/myFetch"
 
+// User Context
+import UserContext from "../utils/UserContext"
+
 export const Login = () => {
+
+    const { token, setToken } = useContext(UserContext)
+
     const [formInputValue, setFormInputValue] = useState({
         email: "",
         password: "",
         collegeID: "",
     })
+
     const [formInputValueError, setFormInputValueError] = useState({
         email: false,
         password: false,
@@ -16,7 +23,11 @@ export const Login = () => {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const res = await myFetchPost('login/', formInputValue)
+        const res = await myFetchPost('login/',
+            { email: formInputValue.email, password: formInputValue.password },
+        )
+        setToken(res.access_token)
+        localStorage.setItem("token", res.access_token)
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -37,8 +48,6 @@ export const Login = () => {
         //     setFormInputValueError({ ...formInputValueError, [e.target.name]: true })
         // }
     }
-    console.log(formInputValue)
-    console.log(formInputValueError)
 
     return (
         <div className="h-screen flex flex-col items-center justify-center">
