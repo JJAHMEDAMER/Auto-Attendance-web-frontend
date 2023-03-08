@@ -46,24 +46,24 @@ export const Nav = () => {
     return (
         <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
             <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />
-            <ul
-                className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full 
-                        child-hover:bg-sky-600 child-hover:bg-opacity-10 child-hover:outline child-hover:outline-1 child-hover:outline-sky-600"
-            >
+            <ul className="flex gap-3">
                 <li>
                     <NavLink
+                        className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
                         to="/"
                         style={({ isActive }) => isActive ? activeStyle : undefined}
                     >
                         Home
                     </NavLink>
                 </li>
-                <li><NavLink
-                    to="/upload-img"
-                    style={({ isActive }) => isActive ? activeStyle : undefined}
-                >
-                    Upload Your Image
-                </NavLink>
+                <li>
+                    <NavLink
+                        className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
+                        to="/upload-img"
+                        style={({ isActive }) => isActive ? activeStyle : undefined}
+                    >
+                        Upload Your Image
+                    </NavLink>
                 </li>
                 <li>Read More</li>
             </ul>
