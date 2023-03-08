@@ -13,7 +13,7 @@ type PropType = {
 
 const UserProvider = ({ children }: PropType) => {
 
-    const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
+    const [token, setToken] = useState<string | null>(localStorage.getItem("token")==="null"? null: localStorage.getItem("token"))
     console.log(token)
 
     useEffect(() => {
