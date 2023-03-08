@@ -3,7 +3,7 @@ import ASULOGO from "../assets/asu-logo.png"
 import { myFetchGet } from "../utils/myFetch";
 
 // NavLink 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // UserContext
 import UserContext from "../utils/UserContext";
@@ -11,6 +11,12 @@ import UserContext from "../utils/UserContext";
 export const Nav = () => {
     const [proPic, setProPic] = useState("");
     const { token, setToken } = useContext(UserContext)
+
+    const navigate = useNavigate()
+    const logoutHandler =  () => {
+        setToken(null)
+        navigate("/")
+    }
 
     useEffect(() => {
 
@@ -27,6 +33,7 @@ export const Nav = () => {
         color: "rgb(219 39 119)",
         fontWeight: "bold"
     }
+
     return (
         <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
             <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />
@@ -74,7 +81,7 @@ export const Nav = () => {
                                 </NavLink>
                             </li>
                         </>
-                    ) : <button onClick={() => setToken(null)}>Log Out</button>
+                    ) : <button onClick={logoutHandler}>Log Out</button>
                 }
             </ul>
 
