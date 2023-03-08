@@ -1,7 +1,6 @@
 import { Nav } from '../comp'
 import { FiUpload } from "react-icons/fi"
 import { BsImages } from "react-icons/bs"
-// import { IoMdImages } from "react-icons/Io"
 import { useEffect, useState, useContext } from 'react'
 import { myFetchPost } from '../utils/myFetch'
 
@@ -20,6 +19,7 @@ export const UploadImg = () => {
 
     const acceptableFileFormate = ".png, .jpeg, .jpg"
     const [dragActive, setDragActive] = useState(false)
+    const [uploading, setUploading] = useState<"Uploading" | "Done" | null>(null)
     const [fileError, setFileError] = useState<"No Image is Selected" | "Wrong Formate (jpg, jpeg or pngs)" | "">("")
     const [fileSelected, setFileSelected] = useState<null | { name: string, size: number }>(null)
 
@@ -53,6 +53,7 @@ export const UploadImg = () => {
         }
         else {
             setFileSelected({ name: inImg.name, size: inImg.size })
+            setUploading("Uploading")
             // const img = {
             //     preview: URL.createObjectURL(inImg),
             //     data: inImg,
@@ -62,10 +63,13 @@ export const UploadImg = () => {
             // uploadImage(formData)
 
             const fileReader = new FileReader()
-            fileReader.onload = () => {
+            fileReader.onload = async () => {
                 const srcData = fileReader.result;
                 // console.log('base64:', srcData)
-                myFetchPost("imgs/", { image: srcData }, token)
+                const res = await myFetchPost("imgs/", { image: srcData }, token)
+                if (res) {
+                    setUploading("Done")
+                }
             }
             fileReader.readAsDataURL(inImg);
         }
@@ -75,7 +79,8 @@ export const UploadImg = () => {
         const time = setTimeout(() => {
             setFileError("")
             setFileSelected(null)
-        }, 3000)
+            setUploading(null)
+        }, 5000)
 
         return () => {
             clearTimeout(time)
@@ -86,7 +91,12 @@ export const UploadImg = () => {
         <div className="min-h-screen flex flex-col">
             <Nav />
             <div className='flex-grow flex flex-col justify-center items-center gap-3'>
-                <p style={{ opacity: `${fileError ? "1" : "0"}` }} className='text-xs font-bold text-red-500 bg-red-500 px-3 py-1 border-red-500 rounded-md border bg-opacity-30'>Error: {fileError}</p>
+                <p
+                    style={{ opacity: `${fileError ? "1" : "0"}` }}
+                    className='text-xs font-bold text-red-500 bg-red-500 px-3 py-1 border-red-500 rounded-md border bg-opacity-30'
+                >
+                    Error: {fileError}
+                </p>
                 <label
                     onDragEnter={(e) => handleDrag(e)}
                     onDragOver={(e) => handleDrag(e)}
@@ -94,8 +104,13 @@ export const UploadImg = () => {
                     onDrop={(e) => handleDrop(e)}
                     className={`h-72 w-2/3 lg:w-1/3 flex flex-col justify-center items-center gap-4 border-dashed border-sky-600 rounded-xl p-8 cursor-pointer bg-slate-800 border-2 ${dragActive ? "bg-slate-600 border-4" : ""}`}
                 >
+                    <p
+                        style={{ opacity: `${uploading ? "1" : "0"}` }}
+                        className='text-xs font-bold text-green-500 bg-green-500 px-3 py-1 border-green-500 rounded-md border bg-opacity-30'
+                    >
+                        Status: {uploading}
+                    </p>
                     <BsImages size={120} />
-                    {/* <IoMdImages size={120} /> */}
                     {
                         fileSelected
                             ? <p className='w-2/3 text-center text-gray-200'>File name: <span className='font-bold'>{fileSelected.name}</span> File size: <span className='font-bold'>{fileSelected.size}</span></p>
