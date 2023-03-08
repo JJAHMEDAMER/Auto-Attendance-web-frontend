@@ -9,22 +9,31 @@ import { NavLink, useNavigate } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 
 export const Nav = () => {
-    const [proPic, setProPic] = useState("");
+    const [proPic, setProPic] = useState<string | null>("");
     const { token, setToken } = useContext(UserContext)
 
     const navigate = useNavigate()
-    const logoutHandler =  () => {
+
+    const logoutHandler = () => {
         setToken(null)
+        setProPic(null)
+        localStorage.setItem("profile Image", "")
         navigate("/")
     }
 
     useEffect(() => {
 
         const getProPic = async () => {
-            const imgList = await myFetchGet('imgs/', token)
-            setProPic(imgList[0].image)
+            if (!localStorage.getItem("profile Image")) {
+                const imgList = await myFetchGet('imgs/', token)
+                localStorage.setItem("profile Image", imgList[0].image)
+                setProPic(imgList[0].image)
+            } else {
+                setProPic(localStorage.getItem("profile Image"))
+            }
+
         }
-        console.log("useEffect")
+
         getProPic()
 
     }, [proPic])
@@ -37,7 +46,6 @@ export const Nav = () => {
     return (
         <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
             <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />
-            <img src={proPic} className="w-14" alt="jj" />
             <ul
                 className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full 
                         child-hover:bg-sky-600 child-hover:bg-opacity-10 child-hover:outline child-hover:outline-1 child-hover:outline-sky-600"
@@ -60,13 +68,14 @@ export const Nav = () => {
                 <li>Read More</li>
             </ul>
 
-            <ul className="flex gap-3 child:font-semibold child:px-3.5 child:py-1.5 child:rounded-full child-hover:bg-sky-600">
+            <ul className="flex gap-3">
                 {
-                    !token ? (
-                        <>
+                    !token
+                        ? <>
                             <li>
                                 <NavLink
                                     to="/login"
+                                    className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
                                     style={({ isActive }) => isActive ? activeStyle : undefined}
                                 >
                                     Login
@@ -75,13 +84,26 @@ export const Nav = () => {
                             <li>
                                 <NavLink
                                     to="/signup"
+                                    className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
                                     style={({ isActive }) => isActive ? activeStyle : undefined}
                                 >
                                     Sign Up
                                 </NavLink>
                             </li>
                         </>
-                    ) : <button onClick={logoutHandler}>Log Out</button>
+                        : <>
+                            {proPic ? <img
+                                src={proPic}
+                                className="w-11 object-cover rounded-full border-2 border-sky-600"
+                                alt="jj"
+                            /> : null}
+                            <button
+                                onClick={logoutHandler}
+                                className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
+                            >
+                                Log Out
+                            </button>
+                        </>
                 }
             </ul>
 
