@@ -5,8 +5,16 @@ import { myFetchPost } from "../utils/myFetch"
 //User Context
 import UserContext from "../utils/UserContext"
 
+//Router
+import {Navigate} from "react-router-dom" 
+
 export const Signup = () => {
+    
     const { token, setToken } = useContext(UserContext)
+    if (token) {
+        return <Navigate to="/" />
+    }
+
     const [formInputValues, setFormInputValues] = useState({
         name: "",
         email: "",
