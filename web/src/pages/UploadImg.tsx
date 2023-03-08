@@ -13,7 +13,7 @@ import UserContext from '../utils/UserContext'
 
 export const UploadImg = () => {
     const { token, setToken } = useContext(UserContext)
-    
+
     if (token === null) {
         return <Navigate to="/login" replace />;
     }
@@ -74,11 +74,12 @@ export const UploadImg = () => {
     useEffect(() => {
         const time = setTimeout(() => {
             setFileError("")
-        }, 2000)
-
-        const time2 = setTimeout(() => {
             setFileSelected(null)
-        }, 7000)
+        }, 3000)
+
+        return () => {
+            clearTimeout(time)
+        }
     }, [fileError, fileSelected])
 
     return (

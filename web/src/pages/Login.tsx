@@ -40,7 +40,7 @@ export const Login = () => {
             },
             token
         )
-        
+
         if (res.access_token) {
             setToken(res.access_token)
             localStorage.setItem("token", res.access_token)
@@ -73,6 +73,10 @@ export const Login = () => {
         const time = setTimeout(() => {
             setError(null)
         }, 3000)
+
+        return () => {
+            clearTimeout(time)
+        }
     }, [error])
 
     return (
