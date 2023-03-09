@@ -80,7 +80,7 @@ export const UploadImg = () => {
             setFileError("")
             setFileSelected(null)
             setUploading(null)
-        }, 5000)
+        }, 3500)
 
         return () => {
             clearTimeout(time)
