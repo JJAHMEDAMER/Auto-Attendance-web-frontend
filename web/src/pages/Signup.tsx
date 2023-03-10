@@ -11,9 +11,6 @@ import {Navigate} from "react-router-dom"
 export const Signup = () => {
     
     const { token, setToken } = useContext(UserContext)
-    if (token) {
-        return <Navigate to="/" />
-    }
 
     const [formInputValues, setFormInputValues] = useState({
         name: "",
@@ -70,6 +67,10 @@ export const Signup = () => {
         const res = await myFetchPost("signup/", formInputValues, token)
         setToken(res.access_token)
         localStorage.setItem("token", token!)
+    }
+
+    if (token) {
+        return <Navigate to="/" />
     }
 
     return (

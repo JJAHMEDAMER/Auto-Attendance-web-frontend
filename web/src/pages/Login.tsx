@@ -6,16 +6,11 @@ import { myFetchPost } from "../utils/myFetch"
 import UserContext from "../utils/UserContext"
 
 // Router
-import { useNavigate, Link, Navigate } from "react-router-dom"
+import {Link, Navigate } from "react-router-dom"
 
 export const Login = () => {
 
     const { token, setToken } = useContext(UserContext)
-    const navigate = useNavigate()
-
-    if (token) {
-        return <Navigate to="/" />
-    }
 
     const [error, setError] = useState<string | null>(null)
     const [formInputValue, setFormInputValue] = useState({
@@ -44,7 +39,6 @@ export const Login = () => {
         if (res.access_token) {
             setToken(res.access_token)
             localStorage.setItem("token", res.access_token)
-            navigate("/")
         }else {
             setError(res.detail)
         }
@@ -78,6 +72,10 @@ export const Login = () => {
             clearTimeout(time)
         }
     }, [error])
+
+    if (token) {
+        return <Navigate to="/upload-img" />
+    }
 
     return (
         <div className="h-screen flex flex-col items-center justify-center">
