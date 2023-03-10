@@ -18,7 +18,7 @@ export const Home = () => {
 
     const handleGetStarted = ()=>{
         if(token){
-            navigate("/")
+            navigate("/upload-img")
         }else{
             navigate("/login")
         }
