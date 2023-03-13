@@ -28,7 +28,7 @@ export const Login = () => {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         const res = await myFetchPost(
-            'login/',
+            '/login',
             {
                 email: formInputValue.email,
                 password: formInputValue.password

@@ -25,7 +25,7 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        myFetchGet('', token)
+        myFetchGet('/', token)
     }, [])
 
     return <div className="min-h-screen flex flex-col">

@@ -25,7 +25,7 @@ export const Nav = () => {
 
         const getProPic = async () => {
             if (!localStorage.getItem("profile Image") && token) {
-                const imgList = await myFetchGet('imgs/', token)
+                const imgList = await myFetchGet('/imgs', token)\
                 localStorage.setItem("profile Image", imgList[0].image)
                 setProPic(imgList[0].image)
             } else {

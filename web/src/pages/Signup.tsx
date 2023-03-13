@@ -64,7 +64,7 @@ export const Signup = () => {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        const res = await myFetchPost("signup/", formInputValues, token)
+        const res = await myFetchPost("/signup", formInputValues, token)
         setToken(res.access_token)
         localStorage.setItem("token", token!)
     }

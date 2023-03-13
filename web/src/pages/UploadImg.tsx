@@ -66,7 +66,7 @@ export const UploadImg = () => {
             fileReader.onload = async () => {
                 const srcData = fileReader.result;
                 // console.log('base64:', srcData)
-                const res = await myFetchPost("imgs/", { image: srcData }, token)
+                const res = await myFetchPost("/imgs", { image: srcData }, token)
                 if (res) {
                     setUploading("Done")
                 }

@@ -17,7 +17,7 @@ const UserProvider = ({ children }: PropType) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const {resJson, res} = await myFetchGetToken("me", token)
+            const {resJson, res} = await myFetchGetToken("/me", token)
             if (!res.ok){
                 setToken(null)
             }
