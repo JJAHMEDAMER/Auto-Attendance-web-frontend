@@ -69,6 +69,9 @@ export const UploadImg = () => {
                 const res = await myFetchPost("/imgs", { image: srcData }, token)
                 if (res) {
                     setUploading("Done")
+                    const timeDone = setTimeout(()=>{
+                        setUploading(null)
+                    }, 2500)
                 }
             }
             fileReader.readAsDataURL(inImg);
@@ -79,13 +82,12 @@ export const UploadImg = () => {
         const time = setTimeout(() => {
             setFileError("")
             setFileSelected(null)
-            setUploading(null)
         }, 3500)
 
         return () => {
             clearTimeout(time)
         }
-    }, [fileError, fileSelected])
+    }, [fileError, fileSelected, uploading])
 
     return (
         <div className="min-h-screen flex flex-col">
