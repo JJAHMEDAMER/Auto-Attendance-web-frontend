@@ -20,6 +20,7 @@ const UserProvider = ({ children }: PropType) => {
             const {resJson, res} = await myFetchGetToken("/me", token)
             if (!res.ok){
                 setToken(null)
+                localStorage.setItem("profile Image", "")
             }
             localStorage.setItem("token", token? token: "null")
         }
