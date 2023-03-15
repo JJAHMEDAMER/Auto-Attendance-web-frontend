@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react"
 import ASULOGO from "../assets/asu-logo.png"
+import genericProfile from "../assets/genericProfile.png"
 import { myFetchGet } from "../utils/myFetch";
 
 // NavLink 
@@ -18,6 +19,7 @@ export const Nav = () => {
         setToken(null)
         setProPic(null)
         localStorage.setItem("profile Image", "")
+        localStorage.setItem("token", "null")
         navigate("/")
     }
 
@@ -26,9 +28,10 @@ export const Nav = () => {
         const getProPic = async () => {
             if (!localStorage.getItem("profile Image") && token) {
                 const navImage = await myFetchGet('/imgs', token)
-                console.log(navImage)
-                localStorage.setItem("profile Image", navImage.image)
-                setProPic(navImage.image)
+                if (navImage){
+                    localStorage.setItem("profile Image", navImage.image)
+                    setProPic(navImage.image)
+                }
             } else {
                 setProPic(localStorage.getItem("profile Image"))
             }
@@ -93,11 +96,11 @@ export const Nav = () => {
                             </li>
                         </>
                         : <>
-                            {proPic ? <img
-                                src={proPic}
-                                className="w-11 object-cover rounded-full border-2 border-sky-600"
-                                alt="jj"
-                            /> : null}
+                            <img
+                                src={proPic? proPic: genericProfile}
+                                className="w-10 h-10 object-cover rounded-full border-2 border-sky-600"
+                                alt="genericProfile"
+                            />
                             <button
                                 onClick={logoutHandler}
                                 className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
