@@ -64,7 +64,7 @@ export const Nav = () => {
             <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
             <ul className="flex gap-1">
                 {
-                    navMenu.map(item => (<li>
+                    navMenu.map((item, id) => (<li key={id}>
                         <NavLink
                             className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
                             to={item.link}
@@ -81,7 +81,7 @@ export const Nav = () => {
                     !token
                         ? <>
                             {
-                                navLoginMenu.map(item => (<li>
+                                navLoginMenu.map((item, index) => (<li key={index}>
                                     <NavLink
                                         to={item.link}
                                         className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
@@ -89,7 +89,8 @@ export const Nav = () => {
                                     >
                                         {item.text}
                                     </NavLink>
-                                </li>))
+                                </li>
+                                ))
                             }
                         </>
                         : <>
