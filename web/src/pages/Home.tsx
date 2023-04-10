@@ -13,19 +13,23 @@ import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
 
-    const {token, setToken} = useContext(UserContext)
+    const { token, setToken } = useContext(UserContext)
     const navigate = useNavigate()
 
-    const handleGetStarted = ()=>{
-        if(token){
+    const handleGetStarted = () => {
+        if (token) {
             navigate("/upload-img")
-        }else{
+        } else {
             navigate("/login")
         }
     }
 
     useEffect(() => {
-        myFetchGet('/', token)
+        const pro = async () => {
+            const res = await myFetchGet('/', token)
+            console.log(res)
+        }
+        pro()
     }, [])
 
     return <div className="min-h-screen flex flex-col">
