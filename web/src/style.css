@@ -4,24 +4,24 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-  padding: 0 2px;
+  width: 12px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(9, 14, 25);
+  background: rgb(41, 47, 60);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(22, 37, 68);
+  background: rgb(62, 82, 119);
+  border-radius: 99999px;
 }
 
 /* Handle on hover */
-/* ::-webkit-scrollbar-thumb:hover {
-    background: rgb(16, 37, 81); 
-  } */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(27, 58, 124);
+}
 
 html,
 body {
