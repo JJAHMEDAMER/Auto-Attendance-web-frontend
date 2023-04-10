@@ -28,7 +28,7 @@ export const Nav = () => {
         const getProPic = async () => {
             if (!localStorage.getItem("profile Image") && token) {
                 const navImage = await myFetchGet('/imgs', token)
-                if (navImage){
+                if (navImage) {
                     localStorage.setItem("profile Image", navImage.image)
                     setProPic(navImage.image)
                 }
@@ -47,57 +47,54 @@ export const Nav = () => {
         fontWeight: "bold"
     }
 
+    const navMenu = [
+        { link: "/", text: "Home" },
+        { link: "/upload-img", text: "Upload Your Image" },
+        // { link: "/", text: "Read More" },
+        { link: "/dashboard", text: "Dashboard" },
+    ]
+
+    const navLoginMenu = [
+        { link: "/login", text: "Login" },
+        { link: "/signup", text: "Sign Up" },
+    ]
+
     return (
-        <nav className="text-gray-50 flex w-full justify-between items-center py-4 px-12">
-            <img src={ASULOGO} className="w-14" alt="ASU_LOGO" />
-            <ul className="flex gap-3">
-                <li>
-                    <NavLink
-                        className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
-                        to="/"
-                        style={({ isActive }) => isActive ? activeStyle : undefined}
-                    >
-                        Home
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
-                        to="/upload-img"
-                        style={({ isActive }) => isActive ? activeStyle : undefined}
-                    >
-                        Upload Your Image
-                    </NavLink>
-                </li>
-                <li>Read More</li>
+        <nav className="text-gray-50 bg-slate-900 flex w-full justify-between items-center py-2 px-8 shadow">
+            <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
+            <ul className="flex gap-1">
+                {
+                    navMenu.map(item => (<li>
+                        <NavLink
+                            className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10 hover:outline hover:outline-1 hover:outline-sky-600"
+                            to={item.link}
+                            style={({ isActive }) => isActive ? activeStyle : undefined}
+                        >
+                            {item.text}
+                        </NavLink>
+                    </li>))
+                }
             </ul>
 
-            <ul className="flex gap-3">
+            <ul className="flex gap-1">
                 {
                     !token
                         ? <>
-                            <li>
-                                <NavLink
-                                    to="/login"
-                                    className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
-                                    style={({ isActive }) => isActive ? activeStyle : undefined}
-                                >
-                                    Login
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/signup"
-                                    className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
-                                    style={({ isActive }) => isActive ? activeStyle : undefined}
-                                >
-                                    Sign Up
-                                </NavLink>
-                            </li>
+                            {
+                                navLoginMenu.map(item => (<li>
+                                    <NavLink
+                                        to={item.link}
+                                        className="font-semibold px-3.5 py-1.5 rounded-full hover:bg-sky-600"
+                                        style={({ isActive }) => isActive ? activeStyle : undefined}
+                                    >
+                                        {item.text}
+                                    </NavLink>
+                                </li>))
+                            }
                         </>
                         : <>
                             <img
-                                src={proPic? proPic: genericProfile}
+                                src={proPic ? proPic : genericProfile}
                                 className="w-10 h-10 object-cover rounded-full border-2 border-sky-600"
                                 alt="genericProfile"
                             />
