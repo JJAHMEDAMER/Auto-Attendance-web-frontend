@@ -20,7 +20,7 @@ export const UploadImg = () => {
     const acceptableFileFormate = ".png, .jpeg, .jpg"
     const [dragActive, setDragActive] = useState(false)
     const [uploading, setUploading] = useState<"Uploading" | "Done" | null>(null)
-    const [fileError, setFileError] = useState<"No Image is Selected" | "Wrong Formate (jpg, jpeg or pngs)" | "">("")
+    const [fileError, setFileError] = useState<"No Image is Selected" | "Wrong Formate (jpg, jpeg or png)" | "">("")
     const [fileSelected, setFileSelected] = useState<null | { name: string, size: number }>(null)
 
     function getImg(e: React.ChangeEvent<HTMLInputElement>) {
@@ -49,7 +49,7 @@ export const UploadImg = () => {
             setFileError("No Image is Selected")
         }
         else if (!acceptableFileFormate.includes(inImg.name.split(".").at(-1)!)) {
-            setFileError("Wrong Formate (jpg, jpeg or pngs)")
+            setFileError("Wrong Formate (jpg, jpeg or png)")
         }
         else {
             setFileSelected({ name: inImg.name, size: inImg.size })
@@ -69,7 +69,7 @@ export const UploadImg = () => {
                 const res = await myFetchPost("/imgs", { image: srcData }, token)
                 if (res) {
                     setUploading("Done")
-                    const timeDone = setTimeout(()=>{
+                    const timeDone = setTimeout(() => {
                         setUploading(null)
                     }, 2500)
                 }
