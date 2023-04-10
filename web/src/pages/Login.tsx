@@ -74,7 +74,7 @@ export const Login = () => {
     }, [error])
 
     if (token) {
-        return <Navigate to="/upload-img" />
+        return <Navigate to="/dashboard" />
     }
 
     return (
