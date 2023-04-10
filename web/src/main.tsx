@@ -8,7 +8,7 @@ import "./style.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // Pages
-import { Home, Signup, Login, UploadImg } from "./pages"
+import { Home, Signup, Login, UploadImg, Dashboard } from "./pages"
 
 // Context
 import { UserProvider } from './utils/UserContext'
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/upload-img',
     element: <UploadImg />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
   }
 ])
 
