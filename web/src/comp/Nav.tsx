@@ -60,7 +60,7 @@ export const Nav = () => {
     ]
 
     return (
-        <nav className="text-gray-50 bg-slate-900 flex w-full justify-between items-center py-2 px-8 shadow">
+        <nav className="fixed top-0 right-0 w-full z-50 text-gray-50 bg-slate-900 flex justify-between items-center py-2 px-8 shadow">
             <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
             <ul className="flex gap-1">
                 {
