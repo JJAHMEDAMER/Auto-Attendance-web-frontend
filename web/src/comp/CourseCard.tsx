@@ -2,7 +2,7 @@ type courseCardPropType = {
     name: String
     code: String
     location: String
-    handleClick: () => {}
+    handleClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
 
