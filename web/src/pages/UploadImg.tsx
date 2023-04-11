@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 
 //context
 import UserContext from '../utils/UserContext'
+import { MainLayout } from '../layout'
 
 export const UploadImg = () => {
     const { token, setToken } = useContext(UserContext)
@@ -90,8 +91,7 @@ export const UploadImg = () => {
     }, [fileError, fileSelected, uploading])
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <Nav />
+        <MainLayout>
             <div className='flex-grow flex flex-col justify-center items-center gap-3'>
                 <p
                     style={{ opacity: `${fileError ? "1" : "0"}` }}
@@ -139,6 +139,6 @@ export const UploadImg = () => {
                 </label>
                 <p className="mt-1 text-sm text-gray-500">PNG, JPG or JPEG.</p>
             </div>
-        </div >
+        </MainLayout>
     )
 }
