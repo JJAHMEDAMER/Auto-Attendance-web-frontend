@@ -3,6 +3,7 @@ import { useContext } from "react"
 
 // Comp
 import { Nav, CourseCard } from "../comp"
+import { MainLayout } from "../layout";
 
 // Router
 import { Navigate } from "react-router-dom";
@@ -35,8 +36,7 @@ export const Dashboard = () => {
     }
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center">
-            <Nav />
+        <MainLayout>
             <div className="flex flex-col flex-grow w-full">
                 <h1 className="text-2xl m-3">Dashboard</h1>
                 <div className="w-full">
@@ -69,6 +69,6 @@ export const Dashboard = () => {
                     }
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
