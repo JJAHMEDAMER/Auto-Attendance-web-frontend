@@ -30,7 +30,7 @@ export const Home = () => {
             const res = await myFetchGet('/', token)
             console.log(res)
         }
-        pro()
+        // pro()
     }, [])
 
     return <MainLayout>
