@@ -12,7 +12,7 @@ import { Navigate } from "react-router-dom";
 import UserContext from '../utils/UserContext'
 
 //fetch
-import { myFetchGet, myFetchPost } from "../utils/myFetch";
+import { myFetchDelete, myFetchGet, myFetchPost } from "../utils/myFetch";
 
 
 type courseType = {
@@ -24,13 +24,24 @@ export const Dashboard = () => {
     const [courses, setCourses] = useState<courseType[]>([])
     const [registeredCourses, setRegisteredCourses] = useState<courseType[]>([])
 
-    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const registerHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log((e.target as HTMLInputElement).getAttribute("data-code"))
         console.log((e.target as HTMLInputElement).dataset.code)
         const res = await myFetchPost('/course-and-student', {
             courseCode: (e.target as HTMLInputElement).dataset.code
         }, token)
 
+        window.location.reload()
+    }
+
+    const unRegisterHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log((e.target as HTMLInputElement).getAttribute("data-code"))
+        console.log((e.target as HTMLInputElement).dataset.code)
+        const res = await myFetchDelete('/course-and-student', {
+            courseCode: (e.target as HTMLInputElement).dataset.code
+        }, token)
+
+        console.log(res)
         window.location.reload()
     }
 
@@ -65,7 +76,8 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
-                                handleClick={(e) => handleClick(e)}
+                                handleClick={(e) => unRegisterHandler(e)}
+                                buttonText="Unregister"
                             />
                         ))
                         : <p className="text-center text-gray-400 font-extralight italic">You have no registered courses</p>
@@ -82,7 +94,8 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
-                                handleClick={(e) => handleClick(e)}
+                                handleClick={(e) => registerHandler(e)}
+                                buttonText="Register"
                             />
 
                         ))
