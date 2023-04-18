@@ -65,7 +65,7 @@ export const Dashboard = () => {
 
     return (
         <MainLayout>
-            <div className="flex flex-col flex-grow w-full">
+            <div className="flex flex-col flex-grow w-full m-5">
                 <h1 className="text-2xl m-3">Dashboard</h1>
                 <div className="w-full">
                     <h1 className="text-center mb-2">Registered Courses</h1>
