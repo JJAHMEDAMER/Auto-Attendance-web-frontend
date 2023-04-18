@@ -8,7 +8,7 @@ async function myFetchGet(url: string, token: string | null = null) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -16,13 +16,36 @@ async function myFetchGet(url: string, token: string | null = null) {
   return resJson;
 }
 
-async function myFetchPost(url: string, body: object, token: string | null = null) {
+async function myFetchPost(
+  url: string,
+  body: object,
+  token: string | null = null
+) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  const resJson = await res.json();
+  return resJson;
+}
+
+async function myFetchDelete(
+  url: string,
+  body: object,
+  token: string | null = null
+) {
+  const URL = BASEURL + url;
+  const res = await fetch(URL, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(body),
   });
@@ -37,7 +60,7 @@ async function myFetchGetToken(url: string, token: string | null = null) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -45,4 +68,4 @@ async function myFetchGetToken(url: string, token: string | null = null) {
   return { resJson, res };
 }
 
-export { myFetchPost, myFetchGet, myFetchGetToken };
+export { myFetchPost, myFetchGet, myFetchDelete, myFetchGetToken };
