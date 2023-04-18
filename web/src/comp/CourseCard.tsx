@@ -9,7 +9,7 @@ type courseCardPropType = {
 
 export const CourseCard = ({ name, code, location, handleClick, buttonText }: courseCardPropType) => {
     return (
-        <div className="flex justify-between items-center w-2/3 max-w-2xl px-3 py-2 mb-1 border border-slate-900 rounded-lg bg-slate-800 mx-auto">
+        <div className="flex justify-between items-center md:w-2/3 md:max-w-2xl px-3 py-2 mb-1 border border-slate-900 rounded-lg bg-slate-800 mx-auto">
             <div>
                 <h2 className="text-xs">{code}</h2>
                 <h1 className="text-xl">{name}</h1>
