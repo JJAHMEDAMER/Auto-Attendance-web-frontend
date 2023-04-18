@@ -19,7 +19,7 @@ type courseType = {
 
 export const AddCourse = () => {
 
-    const {token} = useContext(UserContext)
+    const { token } = useContext(UserContext)
     const [courses, setCourses] = useState<courseType[]>([])
 
     const validationSchema = Yup.object({
@@ -36,7 +36,7 @@ export const AddCourse = () => {
     }
 
     const handleSubmit = async (value: object) => {
-        const res = await myFetchPost('/course', formik.values, token) 
+        const res = await myFetchPost('/course', formik.values, token)
         setCourses(res)
     }
 
@@ -80,7 +80,7 @@ export const AddCourse = () => {
         // }
     ]
 
-    async function deleteCourse(e: React.MouseEvent<HTMLButtonElement>){
+    async function deleteCourse(e: React.MouseEvent<HTMLButtonElement>) {
         const res = await myFetchDelete('/course', {
             courseCode: (e.target as HTMLInputElement).dataset.code
         }, token)
@@ -88,7 +88,7 @@ export const AddCourse = () => {
         setCourses(res)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const getCourses = async () => {
             const res = await myFetchGet("/course", token)
             console.log(res)
@@ -104,64 +104,66 @@ export const AddCourse = () => {
 
     return (
         <MainLayout>
-            <div className="w-full">
-                <h1 className="text-4xl m-2">Add Courses</h1>
-                <form className="flex flex-col gap-3 w-1/2 bg-slate-900 p-5 rounded-2xl mx-auto" onSubmit={formik.handleSubmit}>
-                    {
-                        my_form.map((item, index) => <label
-                            key={index}
-                            className="flex flex-col text-lg"
-                        >
-                            {item.label}
-                            <input
-                                className="rounded-full px-4 py-1 text-sm bg-slate-800 outline-none border-2 border-slate-900
-                                focus:border-pink-600 focus:outline-none focus:bg-slate-900"
-                                name={item.name}
-                                // type={item.type}
-                                type="select"
-                                value={item.value}
-                                onChange={item.onchange}
-                                onBlur={item.onBlur}
-                            />
-                            {item.error && item.touched
-                                ? <p className="text-red-500 text-xs">{item.error}</p>
-                                : null}
-                        </label>)
-                    }
-                    <label>
-                        <div className="flex gap-3 text-lg">
-                            <p>Location</p>
-                            <select
-                                value={formik.values.location}
-                                onChange={formik.handleChange}
-                                name="location"
-                                className="flex-1 rounded-full px-4 py-1 text-sm bg-slate-800 outline-none border-2 border-slate-900
-                                focus:border-pink-600 focus:outline-none focus:bg-slate-900"
+            <div className="w-full flex flex-col md:flex-row">
+                <div className="bg-slate-800 p-5 flex-1">
+                    <h1 className="text-3xl m-3">Add Courses</h1>
+                    <form className="flex flex-col gap-3 max-w-md bg-slate-900 p-5 rounded-2xl mx-auto" onSubmit={formik.handleSubmit}>
+                        {
+                            my_form.map((item, index) => <label
+                                key={index}
+                                className="flex flex-col text-lg"
                             >
-                                <option className="text-gray-300" value="">Select Hall Number</option>
-                                <option value="Hall A">Hall A</option>
-                                <option value="Hall B">Hall B</option>
-                                <option value="Hall C">Hall C</option>
-                                <option value="Hall D">Hall D</option>
-                            </select>
-                        </div>
-                        {formik.errors.location && formik.touched.location
-                            ? <p className="text-red-500 text-xs">{formik.errors.location}</p>
-                            : null}
-                    </label>
-                    <button type="submit" className="bg-pink-600 w-fit mt-2 px-3 py-1 rounded-full">Add Course</button>
-                </form>
-                <div>
-                    <p>ALL Courses</p>
+                                {item.label}
+                                <input
+                                    className="rounded-full px-4 py-1 text-sm bg-slate-800 outline-none border-2 border-slate-900
+                                focus:border-pink-600 focus:outline-none focus:bg-slate-900"
+                                    name={item.name}
+                                    // type={item.type}
+                                    type="select"
+                                    value={item.value}
+                                    onChange={item.onchange}
+                                    onBlur={item.onBlur}
+                                />
+                                {item.error && item.touched
+                                    ? <p className="text-red-500 text-xs">{item.error}</p>
+                                    : null}
+                            </label>)
+                        }
+                        <label>
+                            <div className="flex gap-3 text-lg">
+                                <p>Location</p>
+                                <select
+                                    value={formik.values.location}
+                                    onChange={formik.handleChange}
+                                    name="location"
+                                    className="flex-1 rounded-full px-4 py-1 text-sm bg-slate-800 outline-none border-2 border-slate-900
+                                focus:border-pink-600 focus:outline-none focus:bg-slate-900"
+                                >
+                                    <option className="text-gray-300" value="">Select Hall Number</option>
+                                    <option value="Hall A">Hall A</option>
+                                    <option value="Hall B">Hall B</option>
+                                    <option value="Hall C">Hall C</option>
+                                    <option value="Hall D">Hall D</option>
+                                </select>
+                            </div>
+                            {formik.errors.location && formik.touched.location
+                                ? <p className="text-red-500 text-xs">{formik.errors.location}</p>
+                                : null}
+                        </label>
+                        <button type="submit" className="bg-pink-600 w-fit mt-2 px-3 py-1 rounded-full">Add Course</button>
+                    </form>
+                </div>
+                <div className="bg-slate-900 p-5 flex-1">
+                    <h1 className="text-3xl m-3">ALL Courses</h1>
                     {
-                        courses.map((course, index)=>(
-                            <CourseCard 
-                            key={course.courseCode}
-                            name={course.courseName}
-                            code={course.courseCode}
-                            location={course.location}
-                            handleClick={(e) => deleteCourse(e)}
-                            buttonText="Delete"
+                        courses.map((course, index) => (
+                            <CourseCard
+                                key={course.courseCode}
+                                name={course.courseName}
+                                code={course.courseCode}
+                                location={course.location}
+                                handleClick={(e) => deleteCourse(e)}
+                                buttonText="Delete"
                             />
                         ))
                     }
