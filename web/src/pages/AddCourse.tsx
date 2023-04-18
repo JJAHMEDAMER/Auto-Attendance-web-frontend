@@ -5,16 +5,22 @@ import * as Yup from "yup"
 import { useFormik } from "formik"
 
 //fetch
-import { myFetchPost } from "../utils/myFetch"
+import { myFetchDelete, myFetchGet, myFetchPost } from "../utils/myFetch"
 
 //Context
 import UserContext from "../utils/UserContext"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
+import { CourseCard } from "../comp"
+
+type courseType = {
+    [key: string]: string
+}
 
 export const AddCourse = () => {
 
     const {token} = useContext(UserContext)
+    const [courses, setCourses] = useState<courseType[]>([])
 
     const validationSchema = Yup.object({
         courseName: Yup.string().required('Required'),
@@ -30,10 +36,8 @@ export const AddCourse = () => {
     }
 
     const handleSubmit = async (value: object) => {
-        console.log(value)
         const res = await myFetchPost('/course', formik.values, token) 
-        console.log(res)
-
+        setCourses(res)
     }
 
     const formik = useFormik({
@@ -75,6 +79,24 @@ export const AddCourse = () => {
         //     touched: formik.touched.location
         // }
     ]
+
+    async function deleteCourse(e: React.MouseEvent<HTMLButtonElement>){
+        const res = await myFetchDelete('/course', {
+            courseCode: (e.target as HTMLInputElement).dataset.code
+        }, token)
+
+        setCourses(res)
+    }
+
+    useEffect(()=>{
+        const getCourses = async () => {
+            const res = await myFetchGet("/course", token)
+            console.log(res)
+            setCourses(res)
+        }
+
+        getCourses()
+    }, [])
 
     if (token === null) {
         return <Navigate to="/login" replace />;
@@ -129,6 +151,21 @@ export const AddCourse = () => {
                     </label>
                     <button type="submit" className="bg-pink-600 w-fit mt-2 px-3 py-1 rounded-full">Add Course</button>
                 </form>
+                <div>
+                    <p>ALL Courses</p>
+                    {
+                        courses.map((course, index)=>(
+                            <CourseCard 
+                            key={course.courseCode}
+                            name={course.courseName}
+                            code={course.courseCode}
+                            location={course.location}
+                            handleClick={(e) => deleteCourse(e)}
+                            buttonText="Delete"
+                            />
+                        ))
+                    }
+                </div>
             </div>
         </MainLayout>
     )
