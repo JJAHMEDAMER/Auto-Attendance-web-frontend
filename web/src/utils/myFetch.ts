@@ -2,7 +2,7 @@
 const BASEURL = "https://backend-auto-attendance.up.railway.app"
 // const BASEURL = "http://127.0.0.1:8000";
 
-async function myFetchGet(url: string, token: string | null) {
+async function myFetchGet(url: string, token: string | null = null) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "GET",
@@ -16,7 +16,7 @@ async function myFetchGet(url: string, token: string | null) {
   return resJson;
 }
 
-async function myFetchPost(url: string, body: object, token: string | null) {
+async function myFetchPost(url: string, body: object, token: string | null = null) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "POST",
@@ -31,7 +31,7 @@ async function myFetchPost(url: string, body: object, token: string | null) {
   return resJson;
 }
 
-async function myFetchGetToken(url: string, token: string | null) {
+async function myFetchGetToken(url: string, token: string | null = null) {
   const URL = BASEURL + url;
   const res = await fetch(URL, {
     method: "GET",
