@@ -7,7 +7,14 @@ import { useFormik } from "formik"
 //fetch
 import { myFetchPost } from "../utils/myFetch"
 
+//Context
+import UserContext from "../utils/UserContext"
+import { useContext } from "react"
+import { Navigate } from "react-router-dom"
+
 export const AddCourse = () => {
+
+    const {token} = useContext(UserContext)
 
     const validationSchema = Yup.object({
         courseName: Yup.string().required('Required'),
@@ -24,7 +31,7 @@ export const AddCourse = () => {
 
     const handleSubmit = async (value: object) => {
         console.log(value)
-        const res = await myFetchPost('/course', formik.values, null) 
+        const res = await myFetchPost('/course', formik.values, token) 
         console.log(res)
 
     }
@@ -69,7 +76,9 @@ export const AddCourse = () => {
         // }
     ]
 
-    console.log(formik.errors, formik.touched)
+    if (token === null) {
+        return <Navigate to="/login" replace />;
+    }
 
     return (
         <MainLayout>
