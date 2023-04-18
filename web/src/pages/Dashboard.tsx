@@ -10,7 +10,9 @@ import { Navigate } from "react-router-dom";
 
 //context
 import UserContext from '../utils/UserContext'
-import { myFetchGet } from "../utils/myFetch";
+
+//fetch
+import { myFetchGet, myFetchPost } from "../utils/myFetch";
 
 
 type courseType ={
@@ -20,22 +22,27 @@ type courseType ={
 export const Dashboard = () => {
     const { token, setToken } = useContext(UserContext)
     const [courses, setCourses] = useState<courseType[]>([])
+    const [registeredCourses, setRegisteredCourses] = useState<courseType[]>([])
 
-    const registeredCourses = [
-        { name: "STC", code: "ASU113", location: "911" },
-        { name: "Electronics", code: "ASU114", location: "254" }
-    ]
-
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log((e.target as HTMLInputElement).getAttribute("data-code"))
         console.log((e.target as HTMLInputElement).dataset.code)
+        const res = await myFetchPost('/course-and-student', {
+            courseCode: (e.target as HTMLInputElement).dataset.code
+        }, token)
+
+        window.location.reload()
     }
 
     useEffect(() => {
-        const getCourses = async () => {
-            const res = await myFetchGet('/course', token)
-            console.log(res)
-            setCourses(res)
+        const getCourses = async () => { 
+            const resCourse = await myFetchGet('/course/unregistered', token)
+            const resCourseAndStudent = await myFetchGet('/course-and-student', token)
+            setRegisteredCourses(resCourseAndStudent)
+            setCourses(resCourse)
+
+            console.log(resCourse)
+            console.log(resCourseAndStudent)
         }
         getCourses()
     }, [])
@@ -54,9 +61,9 @@ export const Dashboard = () => {
                     {
                         registeredCourses.map(course => (
                             <CourseCard
-                                key={course.code}
-                                name={course.name}
-                                code={course.code}
+                                key={course.courseCode}
+                                name={course.courseName}
+                                code={course.courseCode}
                                 location={course.location}
                                 handleClick={(e) => handleClick(e)}
                             />
@@ -68,7 +75,7 @@ export const Dashboard = () => {
                 <div className="w-full">
                     <h1 className="text-center mt-10 mb-2">Available Courses</h1>
                     {
-                        courses.map((course: courseType) => (
+                        courses.map((course) => (
                             <CourseCard
                                 key={course.courseCode}
                                 name={course.courseName}
