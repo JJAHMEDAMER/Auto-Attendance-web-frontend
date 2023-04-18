@@ -49,7 +49,7 @@ export const Nav = () => {
 
     const navMenu = [
         { link: "/", text: "Home" },
-        { link: "/upload-img", text: "Upload Your Image" },
+        { link: "/upload-img", text: "Your Image" },
         // { link: "/", text: "Read More" },
         { link: "/dashboard", text: "Dashboard" },
     ]
@@ -60,9 +60,12 @@ export const Nav = () => {
     ]
 
     return (
-        <nav className="fixed top-0 right-0 w-full z-50 text-gray-50 bg-slate-900 flex justify-between items-center py-2 px-8 shadow">
-            <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
-            <ul className="flex gap-1">
+        <nav className="fixed top-0 right-0 w-full z-50 text-gray-50 bg-slate-900 flex justify-between items-center py-2 lg:px-8 px-4 shadow">
+            <div className="flex gap-4 justify-center items-center">
+                <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
+                <p className="hidden lg:block text-lg">Auto Attendance System</p>
+            </div>
+            <ul className="flex gap-1 absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
                 {
                     navMenu.map((item, id) => (<li key={id}>
                         <NavLink
