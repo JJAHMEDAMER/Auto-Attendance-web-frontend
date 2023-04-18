@@ -77,7 +77,7 @@ export const Signup = () => {
         <div className="h-screen flex flex-col items-center justify-center">
             <Nav />
             <div className="flex justify-center items-center flex-grow">
-                <div className="shadow-lg flex justify-center items-stretch w-3/4 min-h-5/6 h-fit bg-slate-900 rounded-2xl">
+                <div className="md:shadow-lg flex justify-center items-stretch md:w-3/4 min-h-5/6 h-fit bg-slate-900 rounded-2xl">
                     <div className="flex flex-col gap-5 items-start justify-between p-6">
                         <div>
                             <h1 className="text-4xl font-bold mb-2">Create An Account</h1>
@@ -89,7 +89,7 @@ export const Signup = () => {
                         </form>
                         <p className="text-sm text-gray-400">Already have account? <a className="underline text-sky-500" href="/login">Log In</a></p>
                     </div>
-                    <div className="w-2/4">
+                    <div className="w-2/4 hidden md:block">
                         <img className="object-cover h-full  rounded-2xl" src="https://media.istockphoto.com/id/1264624897/photo/biometric-verification-and-face-detection.jpg?s=612x612&w=0&k=20&c=MEAfGJH_XZRqMoJNpfB0k8VoEhyVBx7AeSx0W6b0c_o=" alt="" />
                     </div>
                 </div>
