@@ -3,10 +3,11 @@ type courseCardPropType = {
     code: String
     location: String
     handleClick: React.MouseEventHandler<HTMLButtonElement>
+    buttonText: String
 }
 
 
-export const CourseCard = ({ name, code, location, handleClick }: courseCardPropType) => {
+export const CourseCard = ({ name, code, location, handleClick, buttonText }: courseCardPropType) => {
     return (
         <div className="flex justify-between items-center w-2/3 max-w-2xl px-3 py-2 mb-1 border border-slate-900 rounded-lg bg-slate-800 mx-auto">
             <div>
@@ -18,9 +19,9 @@ export const CourseCard = ({ name, code, location, handleClick }: courseCardProp
                 data-code={code}
                 data-name={name}
                 onClick={handleClick}
-                className="rounded-full bg-slate-900 hover:bg-pink-600 px-2 py-1"
+                className="rounded-full bg-slate-900 hover:bg-pink-600 px-3 py-1"
             >
-                Register
+                {buttonText}
             </button>
         </div>
     )
