@@ -15,8 +15,8 @@ import UserContext from '../utils/UserContext'
 import { myFetchGet, myFetchPost } from "../utils/myFetch";
 
 
-type courseType ={
-    [key: string] : string
+type courseType = {
+    [key: string]: string
 }
 
 export const Dashboard = () => {
@@ -35,7 +35,7 @@ export const Dashboard = () => {
     }
 
     useEffect(() => {
-        const getCourses = async () => { 
+        const getCourses = async () => {
             const resCourse = await myFetchGet('/course/unregistered', token)
             const resCourseAndStudent = await myFetchGet('/course-and-student', token)
             setRegisteredCourses(resCourseAndStudent)
@@ -58,8 +58,8 @@ export const Dashboard = () => {
                 <h1 className="text-2xl m-3">Dashboard</h1>
                 <div className="w-full">
                     <h1 className="text-center mb-2">Registered Courses</h1>
-                    {
-                        registeredCourses.map(course => (
+                    {registeredCourses.length != 0
+                        ? registeredCourses.map(course => (
                             <CourseCard
                                 key={course.courseCode}
                                 name={course.courseName}
@@ -68,14 +68,15 @@ export const Dashboard = () => {
                                 handleClick={(e) => handleClick(e)}
                             />
                         ))
+                        : <p className="text-center text-gray-400 font-extralight italic">You have no registered courses</p>
                     }
                 </div>
 
                 {/* Available Course */}
                 <div className="w-full">
                     <h1 className="text-center mt-10 mb-2">Available Courses</h1>
-                    {
-                        courses.map((course) => (
+                    {courses.length != 0
+                        ? courses.map((course) => (
                             <CourseCard
                                 key={course.courseCode}
                                 name={course.courseName}
@@ -85,6 +86,7 @@ export const Dashboard = () => {
                             />
 
                         ))
+                        : <p className="text-center text-gray-400 font-extralight italic">There are no more courses to register</p>
                     }
                 </div>
             </div>
