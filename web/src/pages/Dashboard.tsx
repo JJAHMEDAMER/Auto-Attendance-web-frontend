@@ -76,6 +76,7 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
+                                attendance={course.attendance}
                                 handleClick={(e) => unRegisterHandler(e)}
                                 buttonText="Unregister"
                             />
