@@ -53,7 +53,7 @@ export const Dashboard = () => {
             setCourses(resCourse)
 
             console.log(resCourse)
-            console.log(resCourseAndStudent)
+            console.log(typeof resCourseAndStudent[0].attendance)
         }
         getCourses()
     }, [])
@@ -76,7 +76,7 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
-                                attendance={course.attendance}
+                                attendance={String(course.attendance)}
                                 handleClick={(e) => unRegisterHandler(e)}
                                 buttonText="Unregister"
                             />
