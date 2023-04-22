@@ -73,6 +73,7 @@ export const UploadImg = () => {
                     const timeDone = setTimeout(() => {
                         setUploading(null)
                     }, 2500)
+                    localStorage.setItem("profile Image", srcData as string)
                 }
             }
             fileReader.readAsDataURL(inImg);
@@ -112,7 +113,16 @@ export const UploadImg = () => {
                     >
                         Status: {uploading}
                     </p>
-                    <BsImages size={120} />
+                    {
+                        localStorage.getItem("profile Image")
+                            ? <img
+                                className={`w-52 object-cover border-dashed border-sky-600 rounded-md bg-slate-800 border-2`}
+                                src={localStorage.getItem("profile Image") as string}
+                                alt="your Image"
+                            />
+                            : <BsImages size={120} />
+                    }
+
                     {
                         fileSelected
                             ? <p className='w-2/3 text-center text-gray-200'>File name: <span className='font-bold'>{fileSelected.name}</span> File size: <span className='font-bold'>{fileSelected.size}</span></p>
@@ -124,13 +134,18 @@ export const UploadImg = () => {
                         onChange={(e) => getImg(e)}
                     />
                 </label>
+
+                {/* Divider */}
                 <div className='flex items-center gap-6'>
                     <div className='h-1 w-16 bg-slate-700 rounded-full' />
                     <p className='font-semibold'>OR</p>
                     <div className='h-1 w-16 bg-slate-700 rounded-full' />
                 </div>
+
+                {/* Upload Button */}
                 <label className='flex items-center gap-2 bg-pink-500 px-8 py-2 rounded-full cursor-pointer'>
-                    <FiUpload />Upload
+                    <FiUpload />
+                    <p>{localStorage.getItem("profile Image") ? "Update this image" : "Upload"}</p>
                     <input
                         type="file"
                         accept={acceptableFileFormate}
