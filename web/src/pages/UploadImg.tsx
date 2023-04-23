@@ -105,7 +105,7 @@ export const UploadImg = () => {
                     onDragOver={(e) => handleDrag(e)}
                     onDragLeave={(e) => handleDrag(e)}
                     onDrop={(e) => handleDrop(e)}
-                    className={`h-72 w-2/3 lg:w-1/3 flex flex-col justify-center items-center gap-4 border-dashed border-sky-600 rounded-xl p-8 cursor-pointer bg-slate-800 border-2 ${dragActive ? "bg-slate-600 border-4" : ""}`}
+                    className={`w-2/3 lg:w-1/3 flex flex-col justify-center items-center gap-4 border-dashed border-sky-600 rounded-xl p-8 cursor-pointer bg-slate-800 border-2 ${dragActive ? "bg-slate-600 border-4" : ""}`}
                 >
                     <p
                         style={{ opacity: `${uploading ? "1" : "0"}` }}
