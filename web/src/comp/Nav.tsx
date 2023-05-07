@@ -4,7 +4,7 @@ import genericProfile from "../assets/genericProfile.png"
 import { myFetchGet } from "../utils/myFetch";
 
 //icons
-import { TbMenu2 } from "react-icons/tb"
+import { TbClearAll, TbMenu2 } from "react-icons/tb"
 
 // NavLink 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -67,7 +67,13 @@ export const Nav = () => {
         <>
             <nav className="fixed top-0 right-0 w-full z-50 text-gray-50 bg-slate-900 flex justify-between items-center py-2 lg:px-8 px-4 shadow">
                 <div className="flex gap-4 justify-center items-center">
-                    <TbMenu2 className="text-pink-600 md:hidden" size={30} onClick={() => { setHidden(!hidden) }} />
+                    <span className="md:hidden" onClick={() => { setHidden(!hidden) }}>
+                        {
+                            hidden
+                                ? <TbMenu2 className="text-pink-600" size={30} />
+                                : <TbClearAll className="text-pink-600" size={30} />
+                        }
+                    </span>
                     <img src={ASULOGO} className="w-12 bg-gray-300 rounded-full" alt="ASU_LOGO" />
                     <p className="hidden lg:block text-lg">Auto Attendance System</p>
                 </div>
@@ -119,11 +125,11 @@ export const Nav = () => {
                 </ul>
 
             </nav>
-            <ul className="fixed top-16 bg-slate-900 w-full">
+            <ul className={`fixed z-10 top-16 bg-slate-900 w-full shadow-lg ${hidden ? "hidden" : ""}`}>
                 {
                     navMenu.map((item, id) => (<li key={id}>
                         <NavLink
-                            className={`block font-semibold px-3.5 py-3 rounded-full ${hidden ? "hidden" : ""}`}
+                            className={`block font-semibold px-3.5 py-3 rounded-full`}
                             to={item.link}
                             style={({ isActive }) => isActive ? activeStyle : undefined}
                         >
