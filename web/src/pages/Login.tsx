@@ -45,7 +45,7 @@ export const Login = () => {
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setFormInputValue({ ...formInputValue, [e.target.name]: e.target.value })
+        setFormInputValue({ ...formInputValue, [e.target.name]: e.target.value.trim() })
 
         // let pattern
         // if (e.target.name === "email") {
@@ -110,7 +110,7 @@ export const Login = () => {
                                 error={formInputValueError.password}
                                 errorMsg={"Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"}
                             />
-                            <Input
+                            {/* <Input
                                 label={"College ID"}
                                 placeholder={"your ID"}
                                 name={"collegeID"} // just like in the state object
@@ -118,7 +118,7 @@ export const Login = () => {
                                 onChange={handleChange}
                                 error={formInputValueError.collegeID}
                                 errorMsg={"password must contain at least 1 letter, 1 number and 1 special character"}
-                            />
+                            /> */}
                             <p className="text-center text-red-500 text-sm h-2">{error}</p>
                             <Button text={"Login"} />
                         </form>

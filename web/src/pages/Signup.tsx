@@ -59,7 +59,7 @@ export const Signup = () => {
     ]
 
     function handleFormInput(e: React.ChangeEvent<HTMLInputElement>) {
-        setFormInputValues({ ...formInputValues, [e.target.name]: e.target.value })
+        setFormInputValues({ ...formInputValues, [e.target.name]: e.target.value.trim() })
     }
 
     async function handleSubmit(e: React.FormEvent) {
