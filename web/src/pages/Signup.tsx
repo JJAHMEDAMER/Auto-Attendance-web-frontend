@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Input, Nav } from "../comp"
 import { myFetchPost } from "../utils/myFetch"
 
@@ -6,11 +6,12 @@ import { myFetchPost } from "../utils/myFetch"
 import UserContext from "../utils/UserContext"
 
 //Router
-import {Navigate} from "react-router-dom" 
+import { Navigate } from "react-router-dom"
 
 export const Signup = () => {
-    
+
     const { token, setToken } = useContext(UserContext)
+    const [error, setError] = useState<string | null>(null)
 
     const [formInputValues, setFormInputValues] = useState({
         name: "",
@@ -65,9 +66,21 @@ export const Signup = () => {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         const res = await myFetchPost("/signup", formInputValues, token)
+        console.log(res.status)
+        setError(res.detail)
         setToken(res.access_token)
         localStorage.setItem("token", token!)
     }
+
+    useEffect(() => {
+        const time = setTimeout(() => {
+            setError(null)
+        }, 3000)
+
+        return () => {
+            clearTimeout(time)
+        }
+    }, [error])
 
     if (token) {
         return <Navigate to="/" />
@@ -85,6 +98,7 @@ export const Signup = () => {
                         </div>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
                             {inputData.map((item, index) => (<Input key={index} {...item} />))}
+                            <p className="text-center text-red-500 text-sm h-2">{error}</p>
                             <Button text={"Sign Up"} />
                         </form>
                         <p className="text-sm text-gray-400">Already have account? <a className="underline text-sky-500" href="/login">Log In</a></p>
