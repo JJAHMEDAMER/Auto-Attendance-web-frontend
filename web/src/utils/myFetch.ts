@@ -1,8 +1,8 @@
 // const BASEURL = "https://backend-auto-attendance.onrender.com";  // Render
 // const BASEURL = "https://backend-auto-attendance.up.railway.app"  // Railway
 // const BASEURL = "http://127.0.0.1:8000";  // Local Dev
-const BASEURL = "https://20.199.123.194";  // Microsoft Azure
-
+// const BASEURL = "https://20.199.123.194";  // Microsoft Azure
+const BASEURL = "https://asu.francecentral.cloudapp.azure.com";  // Microsoft Azure
 
 async function myFetchGet(url: string, token: string | null = null) {
   const URL = BASEURL + url;
