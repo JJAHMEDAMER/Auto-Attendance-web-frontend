@@ -4,3 +4,4 @@ export * from "./Home";
 export * from "./UploadImg";
 export * from "./Dashboard";
 export * from "./AddCourse";
+export * from "./Attendance";
