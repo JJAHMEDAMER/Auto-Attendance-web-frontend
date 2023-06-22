@@ -20,7 +20,7 @@ export const CourseCard = ({ name, code, location, handleClick, buttonText, atte
             </div>
 
             {attendance
-                ? <Link to="/attendance" className="">
+                ? <Link to={`/attendance/${code}`}>
                     <div
                         className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-gray-200 text-sm font-bold tracking-wider px-4 py-2 hover:bg-slate-900 transition-all hover:border rounded-full border-pink-600"
                     >

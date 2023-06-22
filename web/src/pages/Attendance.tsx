@@ -1,7 +1,8 @@
-import React from 'react'
+import { useParams } from 'react-router-dom'
 
 export const Attendance = () => {
-  return (
-    <div>Attendance</div>
-  )
+    const { courseCode } = useParams()
+    return (
+        <div>Attendance: {courseCode}</div>
+    )
 }
