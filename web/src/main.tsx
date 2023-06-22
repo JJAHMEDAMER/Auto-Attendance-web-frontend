@@ -8,7 +8,7 @@ import "./style.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // Pages
-import { Home, Signup, Login, UploadImg, Dashboard, AddCourse } from "./pages"
+import { Home, Signup, Login, UploadImg, Dashboard, AddCourse, Attendance } from "./pages"
 
 // Context
 import { UserProvider } from './utils/UserContext'
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/addCourse',
     element: <AddCourse />
+  },
+  {
+    path: '/attendance',
+    element: <Attendance />
   }
 ])
 
