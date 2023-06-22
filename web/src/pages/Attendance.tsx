@@ -1,14 +1,25 @@
+//React 
+import { useContext } from "react"
+
+//context
+import UserContext from "../utils/UserContext"
+
+// Lay Out
 import { MainLayout } from '../layout'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 export const Attendance = () => {
     const { courseCode } = useParams()
+
+    const {token} = useContext(UserContext)
 
     const atten = [
         { date: "12/12/12", attendance: "Attended" },
         { date: "12/12/12", attendance: "Attended" },
         { date: "12/12/12", attendance: "Attended" },
     ]
+
+    if (!token) return  <Navigate to="/login" replace />;
     return (
         <MainLayout>
             <div className='w-full px-5'>
