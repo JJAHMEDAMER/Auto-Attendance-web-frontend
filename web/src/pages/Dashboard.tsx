@@ -48,7 +48,7 @@ export const Dashboard = () => {
     useEffect(() => {
         const getCourses = async () => {
             const resCourse = await myFetchGet('/course/unregistered', token)
-            const resCourseAndStudent = await myFetchGet('/course-and-student', token)
+            const resCourseAndStudent = await myFetchGet('/attendance/summary', token)
             setRegisteredCourses(resCourseAndStudent)
             setCourses(resCourse)
 
