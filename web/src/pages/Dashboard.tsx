@@ -27,7 +27,7 @@ export const Dashboard = () => {
     const registerHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log((e.target as HTMLInputElement).getAttribute("data-code"))
         console.log((e.target as HTMLInputElement).dataset.code)
-        const res = await myFetchPost('/course-and-student', {
+        const res = await myFetchPost('/registration', {
             courseCode: (e.target as HTMLInputElement).dataset.code
         }, token)
 
@@ -37,7 +37,7 @@ export const Dashboard = () => {
     const unRegisterHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log((e.target as HTMLInputElement).getAttribute("data-code"))
         console.log((e.target as HTMLInputElement).dataset.code)
-        const res = await myFetchDelete('/course-and-student', {
+        const res = await myFetchDelete('/registration', {
             courseCode: (e.target as HTMLInputElement).dataset.code
         }, token)
 
