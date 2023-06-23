@@ -73,7 +73,7 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
-                                attendance={`${course.attendanceCount}/${course.numberOfLectures}`}
+                                attendance={`${course.attendanceCount ? course.attendanceCount : 0}/${course.numberOfLectures ? course.numberOfLectures : 0}`}
                                 handleClick={(e) => unRegisterHandler(e)}
                                 buttonText="Unregister"
                             />
