@@ -51,9 +51,6 @@ export const Dashboard = () => {
             const resCourseAndStudent = await myFetchGet('/attendance/summary', token)
             setRegisteredCourses(resCourseAndStudent)
             setCourses(resCourse)
-
-            console.log(resCourse)
-            console.log(typeof resCourseAndStudent[0].attendance)
         }
         getCourses()
     }, [])
@@ -76,7 +73,7 @@ export const Dashboard = () => {
                                 name={course.courseName}
                                 code={course.courseCode}
                                 location={course.location}
-                                attendance={String(course.attendance)}
+                                attendance={`${course.attendanceCount}/${course.numberOfLectures}`}
                                 handleClick={(e) => unRegisterHandler(e)}
                                 buttonText="Unregister"
                             />
