@@ -124,7 +124,7 @@ export const Login = () => {
                         </form>
                         <p className="text-sm text-gray-400">Don't Have an Account? <Link className="underline text-sky-500" to="/signup">Sign Up</Link></p>
                     </div>
-                    <div className="max-w-1/2 w-2/5 hidden sm:block">
+                    <div className="w-2/4 hidden sm:block">
                         <img className="object-cover h-full  rounded-2xl" src="https://media.istockphoto.com/id/1264624897/photo/biometric-verification-and-face-detection.jpg?s=612x612&w=0&k=20&c=MEAfGJH_XZRqMoJNpfB0k8VoEhyVBx7AeSx0W6b0c_o=" alt="" />
                     </div>
                 </div>
